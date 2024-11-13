@@ -3,6 +3,7 @@ import { customColors } from "./customColors";
 import { rules } from "./rules";
 import { customOrder } from "./customOrders";
 import { pieces } from "./pieces";
+import Popup from "./Popup"
 
 export default function Board() {
   const [selectedPiece, setSelectedPiece] = useState(null);
@@ -142,11 +143,7 @@ export default function Board() {
       })}
 
       {currentPositionInfo && (
-        <div
-          className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-12 border border-black rounded-lg ${currentPositionInfo.customColor}`}
-        >
-          <div className="text-6xl font-bold">{currentPositionInfo.rule}</div>
-        </div>
+          <Popup currentPositionInfo = {currentPositionInfo}/>
       )}
 
       <div
