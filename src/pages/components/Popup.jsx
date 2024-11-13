@@ -2,8 +2,6 @@ import Modal from "react-modal";
 import React, { useEffect, useState } from "react";
 
 const Popup = (props) => {
-  //팝업
-
   const [currentPositionInfo, setCurrentPositionInfo] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
 
