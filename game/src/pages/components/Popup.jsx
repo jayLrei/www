@@ -22,8 +22,7 @@ const Popup = (props) => { //팝업
             ariaHideApp={false}
             contentLabel="Pop up Message"
         >
-            <div
-                >
+            <div>
                 <div className="text-6xl font-bold">{currentPositionInfo.rule}</div>
             </div>
         </Modal>

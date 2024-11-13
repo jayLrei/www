@@ -1,0 +1,61 @@
+/*body {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh;*/
+/*    margin: 0;*/
+/*    background-color: #f0f0f0;*/
+/*}*/
+
+/*.container {*/
+/*    text-align: center;*/
+/*}*/
+
+.dice {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+    position: relative;
+    background-color: white;
+    border: 2px solid #333;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    display: none;
+}
+
+.dot.one { top: 40px; left: 40px; }
+.dot.two { top: 20px; left: 20px; }
+.dot.three { top: 20px; left: 60px; }
+.dot.four { top: 60px; left: 20px; }
+.dot.five { top: 60px; left: 60px; }
+.dot.six { top: 20px; left: 40px; }
+.dot.seven { top: 60px; left: 40px; }
+.dot.eight { top: 40px; left: 20px; }
+.dot.nine { top: 40px; left: 60px; }
+
+.rolling {
+    animation: roll 0.5s linear;
+}
+
+.dot.visible {
+    display: block;
+}
+
+@keyframes roll {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
