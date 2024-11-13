@@ -1,0 +1,6 @@
+# dependencies
+node_modules/
+# production build
+build/
+# 환경 파일
+.env
