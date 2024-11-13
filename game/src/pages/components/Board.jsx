@@ -3,7 +3,7 @@ import { customColors } from "./customColors";
 import { rules } from "./rules";
 import { customOrder } from "./customOrders";
 import { pieces } from "./pieces";
-import Popup from "./Popup"
+import Popup from "./Popup";
 
 export default function Board() {
   const [selectedPiece, setSelectedPiece] = useState(null);
@@ -102,7 +102,7 @@ export default function Board() {
               {rules[customIndex]}
             </span>
 
-            {customIndex === 59 && (
+            {customIndex === 52 && (
               <div className="flex items-center justify-center font-bold text-6xl border-black border-8 rounded-full p-2 w-24 h-24">
                 {diceRoll !== null ? diceRoll : ""}
               </div>
@@ -143,11 +143,11 @@ export default function Board() {
       })}
 
       {currentPositionInfo && (
-          <Popup currentPositionInfo = {currentPositionInfo}/>
+        <Popup currentPositionInfo={currentPositionInfo} />
       )}
 
       <div
-        className="absolute bottom-80 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-orange-500/20 to-cyan-500/20 text-4xl text-black py-4 px-8 rounded-lg cursor-pointer"
+        className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-orange-500 to-cyan-500 text-5xl font-bold text-white py-8 px-16 rounded-lg cursor-pointer shadow-lg"
         onClick={rollDice}
       >
         행운의 주사위 굴리기
