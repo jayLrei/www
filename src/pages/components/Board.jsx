@@ -4,6 +4,7 @@ import { rules } from "./rules";
 import { customOrder } from "./customOrders";
 import { pieces } from "./pieces";
 import Popup from "./Popup";
+import "../../css/diceStyle.css";
 
 export default function Board() {
   const [selectedPiece, setSelectedPiece] = useState(null);
@@ -15,13 +16,42 @@ export default function Board() {
       return acc;
     }, {})
   );
+  const [rolling, setRolling] = useState(false);
+
   const rollDice = () => {
-    const randomRoll = Math.floor(Math.random() * 6) + 1;
-    setDiceRoll(randomRoll);
-    if (selectedPiece !== null) {
-      movePiece(selectedPiece, randomRoll);
+    setDiceRoll(null);
+    setRolling(true);
+
+    setTimeout(() => {
+      const randomRoll = Math.floor(Math.random() * 6) + 1;
+      setDiceRoll(randomRoll);
+      if (selectedPiece !== null) {
+        movePiece(selectedPiece, randomRoll);
+      }
+      setRolling(false);
+      showDots(randomRoll);
+    }, 500);
+  };
+
+  const showDots = () => {
+    switch (diceRoll) {
+      case 1:
+        return ["one"];
+      case 2:
+        return ["two", "five"];
+      case 3:
+        return ["one", "two", "five"];
+      case 4:
+        return ["two", "three", "four", "five"];
+      case 5:
+        return ["one", "two", "three", "four", "five"];
+      case 6:
+        return ["two", "three", "four", "five", "six", "seven"];
+      default:
+        return [];
     }
   };
+
   const selectPiece = (pieceNumber) => {
     if (selectedPiece === pieceNumber) {
       setSelectedPiece(null);
@@ -102,9 +132,46 @@ export default function Board() {
               {rules[customIndex]}
             </span>
 
-            {customIndex === 52 && (
-              <div className="flex items-center justify-center font-bold text-6xl border-black border-8 rounded-full p-2 w-24 h-24">
-                {diceRoll !== null ? diceRoll : ""}
+            {customIndex === 59 && (
+              // <div className="flex items-center justify-center font-bold text-6xl border-black border-8 rounded-full p-2 w-24 h-24">
+              //   {diceRoll !== null ? diceRoll : ""}
+              // </div>
+              <div className={`dice ${rolling ? "rolling" : ""}`} id="dice">
+                <div
+                  className={`dot one ${
+                    showDots().includes("one") ? "visible" : ""
+                  }`}
+                />
+                <div
+                  className={`dot two ${
+                    showDots().includes("two") ? "visible" : ""
+                  }`}
+                />
+                <div
+                  className={`dot three ${
+                    showDots().includes("three") ? "visible" : ""
+                  }`}
+                />
+                <div
+                  className={`dot four ${
+                    showDots().includes("four") ? "visible" : ""
+                  }`}
+                />
+                <div
+                  className={`dot five ${
+                    showDots().includes("five") ? "visible" : ""
+                  }`}
+                />
+                <div
+                  className={`dot six ${
+                    showDots().includes("six") ? "visible" : ""
+                  }`}
+                />
+                <div
+                  className={`dot seven ${
+                    showDots().includes("seven") ? "visible" : ""
+                  }`}
+                />
               </div>
             )}
             {customIndex === 62 && (
@@ -145,7 +212,6 @@ export default function Board() {
       {currentPositionInfo && (
         <Popup currentPositionInfo={currentPositionInfo} />
       )}
-
       <div
         className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-orange-500 to-cyan-500 text-5xl font-bold text-white py-8 px-16 rounded-lg cursor-pointer shadow-lg"
         onClick={rollDice}
