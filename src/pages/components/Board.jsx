@@ -62,6 +62,9 @@ export default function Board() {
   };
   const movePiece = (pieceNumber, diceValue) => {
     let targetPosition = piecePositions[pieceNumber] + diceValue;
+    if(targetPosition > 27){
+      setRank(rank+1);
+      targetPosition = 28;}
 
     const jailPositions = {
       9: 12,
@@ -72,6 +75,7 @@ export default function Board() {
     const newPositions = { ...piecePositions };
 
     const animateMovement = () => {
+      if(piecePositions[pieceNumber] > 27) return;
       setPiecePositions((prevPositions) => {
         const currentPos = prevPositions[pieceNumber];
 
@@ -150,9 +154,10 @@ export default function Board() {
                 : "bg-white"
             }`}
           >
+            {customIndex != 28 &&
             <span className="text-lg text-center font-semibold" style={{ whiteSpace: 'pre-line' }}>
               {rules[customIndex]}
-            </span>
+            </span>}
 
             {customIndex === 59 && (
               // <div className="flex items-center justify-center font-bold text-6xl border-black border-8 rounded-full p-2 w-24 h-24">
