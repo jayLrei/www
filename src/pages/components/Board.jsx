@@ -63,7 +63,6 @@ export default function Board() {
   const movePiece = (pieceNumber, diceValue) => {
     let targetPosition = piecePositions[pieceNumber] + diceValue;
     if(targetPosition > 27){
-      setRank(rank+1);
       targetPosition = 28;}
 
     const jailPositions = {
