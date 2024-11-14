@@ -63,10 +63,10 @@ export default function Board() {
   const movePiece = (pieceNumber, diceValue) => {
     let targetPosition = piecePositions[pieceNumber] + diceValue;
 
-    // 도착 위치에서의 특별 규칙
     const jailPositions = {
       9: 12,
       18: 22,
+      15: 0,
     };
 
     const newPositions = { ...piecePositions };
