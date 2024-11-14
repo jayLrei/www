@@ -128,7 +128,7 @@ export default function Board() {
                 : "bg-white"
             }`}
           >
-            <span className="text-lg text-center font-semibold">
+            <span className="text-lg text-center font-semibold" style={{ whiteSpace: 'pre-line' }}>
               {rules[customIndex]}
             </span>
 
