@@ -60,14 +60,15 @@ export default function Board() {
       setSelectedPiece(pieceNumber);
     }
   };
+
+  const jailPositions = {
+    9: 12,
+    18: 22,
+    15: 0,
+  };
+
   const movePiece = (pieceNumber, diceValue) => {
     let targetPosition = piecePositions[pieceNumber] + diceValue;
-
-    const jailPositions = {
-      9: 12,
-      18: 22,
-      15: 0,
-    };
 
     const newPositions = { ...piecePositions };
 
@@ -112,25 +113,47 @@ export default function Board() {
 
   const moveBackwards = () => {
     if (selectedPiece !== null) {
-      setPiecePositions((prevPositions) => {
-        const newPositions = { ...prevPositions };
-        let newPosition = prevPositions[selectedPiece] - 3;
+      const targetPosition = Math.max(piecePositions[selectedPiece] - 3, 0);
 
-        if (newPosition < 0) {
-          newPosition = 0;
-        }
+      const newPositions = { ...piecePositions };
 
-        newPositions[selectedPiece] = newPosition;
-        const reachedIndex = newPosition;
-        const customColor = customColors[reachedIndex];
-        const rule = rules[reachedIndex];
+      const animateMovement = () => {
+        setPiecePositions((prevPositions) => {
+          const currentPos = prevPositions[selectedPiece];
 
-        setCurrentPositionInfo({ customColor, rule });
+          if (currentPos > targetPosition) {
+            newPositions[selectedPiece] = currentPos - 1;
+          }
 
-        return newPositions;
-      });
+          if (newPositions[selectedPiece] === targetPosition) {
+            clearInterval(intervalId);
+
+            const reachedIndex = newPositions[selectedPiece];
+            const customColor = customColors[reachedIndex];
+            const rule = rules[reachedIndex];
+            setCurrentPositionInfo({ customColor, rule });
+
+            if (jailPositions[reachedIndex] !== undefined) {
+              setTimeout(() => {
+                const nextPosition = jailPositions[reachedIndex];
+                setPiecePositions((prevPositions) => ({
+                  ...prevPositions,
+                  [selectedPiece]: nextPosition,
+                }));
+
+                const customColor = customColors[nextPosition];
+                const rule = rules[nextPosition];
+                setCurrentPositionInfo({ customColor, rule });
+              }, 2000);
+            }
+          }
+          return { ...prevPositions, ...newPositions };
+        });
+      };
+      const intervalId = setInterval(animateMovement, 500);
     }
   };
+
   return (
     <div className="w-full h-[90vh] grid grid-cols-9 grid-rows-7 gap-1 relative">
       {Array.from({ length: 63 }).map((_, index) => {
@@ -150,7 +173,10 @@ export default function Board() {
                 : "bg-white"
             }`}
           >
-            <span className="text-lg text-center font-semibold" style={{ whiteSpace: 'pre-line' }}>
+            <span
+              className="text-lg text-center font-semibold"
+              style={{ whiteSpace: "pre-line" }}
+            >
               {rules[customIndex]}
             </span>
 
