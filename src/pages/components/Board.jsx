@@ -5,7 +5,8 @@ import { customOrder } from "./customOrders";
 import { pieces } from "./pieces";
 import Popup from "./Popup";
 import "../../css/diceStyle.css";
-
+// 9에 도착하면 12로
+// 18에 도착하면 22로
 export default function Board() {
   const [selectedPiece, setSelectedPiece] = useState(null);
   const [diceRoll, setDiceRoll] = useState(null);
@@ -60,7 +61,14 @@ export default function Board() {
     }
   };
   const movePiece = (pieceNumber, diceValue) => {
-    const targetPosition = piecePositions[pieceNumber] + diceValue;
+    let targetPosition = piecePositions[pieceNumber] + diceValue;
+
+    const jailPositions = {
+      9: 12,
+      18: 22,
+      15: 0,
+    };
+
     const newPositions = { ...piecePositions };
 
     const animateMovement = () => {
@@ -79,6 +87,20 @@ export default function Board() {
           const customColor = customColors[reachedIndex];
           const rule = rules[reachedIndex];
           setCurrentPositionInfo({ customColor, rule });
+
+          if (jailPositions[reachedIndex] !== undefined) {
+            setTimeout(() => {
+              const nextPosition = jailPositions[reachedIndex];
+              setPiecePositions((prevPositions) => ({
+                ...prevPositions,
+                [pieceNumber]: nextPosition,
+              }));
+
+              const customColor = customColors[nextPosition];
+              const rule = rules[nextPosition];
+              setCurrentPositionInfo({ customColor, rule });
+            }, 2000);
+          }
         }
 
         return { ...prevPositions, ...newPositions };
