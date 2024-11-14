@@ -142,7 +142,7 @@ export default function Board() {
           <div
             key={customIndex}
             className={`flex items-center p-5 justify-center w-100 h-100 relative ${
-              customColors[customIndex]
+              customIndex != 28 ? customColors[customIndex] : ""
             } ${
               ![
                 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
@@ -238,6 +238,7 @@ export default function Board() {
       {currentPositionInfo && (
         <Popup currentPositionInfo={currentPositionInfo} />
       )}
+
       <div
         className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-orange-500 to-cyan-500 text-5xl font-bold text-white py-8 px-16 rounded-lg cursor-pointer shadow-lg"
         onClick={rollDice}

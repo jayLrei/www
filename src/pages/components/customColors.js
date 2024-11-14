@@ -27,4 +27,5 @@ export const customColors = [
   "bg-green-200",
   "bg-rose-700 text-white",
   "bg-green-200",
+  "bg-yellow-200",
 ];
