@@ -4,3 +4,5 @@ node_modules/
 build/
 # 환경 파일
 .env
+# misc
+.DS_Store
