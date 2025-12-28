@@ -236,7 +236,7 @@ export default function Board() {
                 onClick={moveBackwards}
                 disabled={!selectedPiece}
               >
-                뒤로 3칸 보내기...
+                뒤로 3칸
               </div>
             )}
             {pieces.map((piece) => {

@@ -4,7 +4,7 @@ export default function Description() {
   return (
     <div className="absolute z-5 bg-gradient-to-r from-orange-500/20 to-cyan-500/20 rounded-xl bg-opacity-90 text-black p-6 rounded-lg shadow-lg w-100 text-center">
       <h2 className="text-6xl font-bold mb-10">
-        Whever 주민 모두 행복해지는 주루마블
+        WWW 주민 모두 행복해지는 주루마블
       </h2>
       <div className="text-4xl flex flex-col gap-10 text-left font-semibold">
         <p>1. 주사위를 던져 나오는 숫자대로 칸을 이동한다.</p>
